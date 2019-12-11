@@ -1,0 +1,44 @@
+\documentclass[a4paper, 12pt, English]{article}
+\usepackage{setup} %Se setup.sty for inkluderede pakker
+\begin{document}
+
+\subfile{frontpage.tex}
+%\subfile{Examples.tex}
+
+%%%%%%%%%%%%  Inkluder følgende sektioner %%%%%%%%%%%%
+\subfile{0_Main/1_Prologue/Abstract.tex}
+\newpage
+
+\setcounter{secnumdepth}{3} % removes numbering from subsubsections
+\setcounter{tocdepth}{2} % set level limit for TOC (includes section and subsection)
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic} %Sidehoved og sidefod
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\subfile{0_Main/1_Prologue/Introduction.tex}
+\newpage
+\subfile{0_Main/2_Body/Background.tex}
+\newpage
+\subfile{0_Main/2_Body/Architecture.tex}
+\newpage
+\subfile{0_Main/2_Body/Visualization.tex}
+\newpage
+
+
+%%%%%%%%%%%%  Inkluder Andet %%%%%%%%%%%%
+% Glossary.
+%\newpage
+%\printglossary[type=\acronymtype]
+%\printglossary[type=main]
+
+%\newpage
+%\nocite{*}%Shows all refs
+%\printbibliography
+
+% Appendix removed to increase compile speed
+\newpage
+\subfile{1_Appendix/appendices.tex}
+
+\end{document}
