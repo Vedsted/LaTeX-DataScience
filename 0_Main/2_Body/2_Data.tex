@@ -1,0 +1,12 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Data}
+Multiple data sources have published data sets pertaining to crime rates in the England, Wales and Northern Ireland. One of these data sources is made available from \hyperlink{https://data.police.uk/}{Data Police UK} \cite{dataPolice}. Crime data is uploaded to their database and made publicly available on a monthly basis. The set of data used in this project spans from November 2016 to October 2019, totaling at 7.5 GB of data. The data consists of three data sets; (1) Street crime, (2) Crime outcome and (3) Stop and search. 
+
+% The data set volumes 6GB of crime data and add up to 2GB of new data per month. Multiple types of data sets are available, this project utilizes the "Street Crimes" data, however, "Stop and Search" and "Outcomes" are available as well. 
+
+The Street Crimes data set lists a multitude of crimes that have occurred in a given area. Each file is specified by a month and police force (e.g. 2017-12 City of London) from January 2017 to October 2019. These files contain the following columns: Crime ID, Month, Reported By, Falls Within, Longitude, Latitude, Location, LSOA Code, LSOA Name, Crime Type, Last Outcome Category and Context. The columns "Reported By" and "Falls Within" reference which police force that has reported the crime and which police force that is responsible for the crime, respectively. The total data set contains records falling under the jurisdiction of 43 different police forces accumulating to a total of 20 million crime records. LSOA (Lower Layer Super Output Area) is a geospatial statistical unit used in England and Wales, they define specific locations. The Crime Type columns takes on one of 14 different values such as Sexual Offence, Anti-Social Behaviour, and so forth. 
+
+All records in the dataset have been anonymized prior to being published. For example, dates in the format YYYY-MM-dd are transformed to YYYY-MM, and location data (latitude, longitude) pairs are mapped to nearest \textit{anonymous map points} which entails public places, centre point of a street etc. Anonymized data limits the potential insights from the crime data, but should still be able to provide an acceptable level of insight because the list of anonymous map points consists of approximately 80\% of the original map points \cite{dataPoliceAbout}.
+
+\end{document}

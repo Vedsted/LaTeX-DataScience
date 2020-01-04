@@ -1,0 +1,116 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Introduction}
+
+%Dataset:
+%https://www.kaggle.com/sohier/London-police-records 
+%Use the location data to make clustering of the city areas and the amount of crime in that area.
+% 
+%Fulfills
+%VVV:
+%    Volume:
+%    1GB data (only London. If we use all of England it would be more)
+%     
+%    Velocity:
+%    2GB new data per month (in all of England)
+%     
+%    Variety:
+%    3 different data sources (.csv files) with different structure (Crime data, Stops and searches, Outcomes)
+%    
+% 
+%This dataset was kindly released by the British Home Office under the Open
+%Government License 3.0 at https://data.police.uk/data/.
+% 
+%Insight:
+%We wish to perform clustering to see what patterns are in the data. We expect answers to questions such as:
+%
+%    What
+%    areas contain the most violent crime?
+%     
+%    What
+%    types of crime most often lead to a suspect charged with a crime?
+%     
+%    Which
+%    ethnicities are most often found with drugs when searched?
+%     
+%
+%But surprising insights may also present themselves.
+% 
+%Justification:
+%The insight achieved from this data will be able to aid the London police department in managing their resources throughout the city. 
+
+
+% Actual Text
+Crime rates in London have been steadily rising over the course of the last decade. From 2013 to 2019 the number of crimes per 1000 population has increased from 77.9 to 95.99 \cite{londonCrime}. High crime rates are problematic but being able to see if increasing crime rates is a trend or coincidence is important to know prior to taking any drastic action. This thought process lays the foundation for this project, which aims to be able to present crime-rate information in England, Wales and Northern Ireland.
+
+\subsection{Problem Definition}
+% Volume of data makes processing & visualization difficult
+% 
+
+
+Increasing crime rates are problematic for multiple aspects of a community ranging from the government and down to individual civilians, both those directly related to crimes and others. Theft leads directly to unexpected costs and inconveniences for the affected victims, violent crimes have very negative physical and emotional consequences and crimes in general often lead to anxiety, fear or worry \cite{crimeEffect}. Knowing about the geographical distribution of crime can assist in dealing with problem areas. 
+
+Currently the volume of data makes it difficult to visualize an overview of all of England, Wales and Northern Ireland. This project attempts to provide a cluster platform supporting storage and processing of these large amount of data while still allowing for flexible queries. This platform should be able to support a wide range of visualizations and statistics.
+
+%way of visualizing crime rates across the UK, which allows for easier interpretation of changes in crime between different periods of time for given geographical locations. This visualization is done through use of heat maps over the UK. 
+
+%Value can be created by identifying trends amongst the features of crime data. Things such as:
+%\begin{itemize}
+%    \item Which areas are most prone to crime during holiday seasons?
+%    \item What is the most prominent crime type of each of London's LSOAs?
+%    \item Which crime type is most prominent in each area depending on the season?
+%\end{itemize}
+
+\todoL{Der mangler rød tråd fra spørgsmål (scope) til løsningen. Forslag: Omformuler scope eller sørg for at spørgsmålene tydeligt besvares i rapporten}
+
+\subsection{Stakeholders}
+Crime levels affect the attractiveness of living areas, as people generally prefer to live in areas with low crime rates. Having areas with excessively high crime rates is therefore bothersome for the government, because these areas become a liability due to people not wanting to live there which often leads to lower rent prices for public housing \cite{rentVsCrime}. UK police forces have to deal with increased crime rates by increasing their capacity either through bolstering their numbers or increasing workloads of individual officers - both of which are costly. \\
+%Not Actual Text
+
+% What value/insight does the system bring?
+%Resource allocation of police staff among Great Britain
+%Civilians are able to see "neighbourhoods" with their crime rates which may help to inform where to buy property.
+%Government are able to inform of possible locations to stay away from.
+%Government can find patterns in the data in order to gain new knowledge. 
+
+% What insights do we wish to achieve? 
+
+
+% Visualizations
+%Heat geo map of crimes
+%Bar charts (freq)
+%Contingency tables
+
+
+%Possible methods:
+%Clustering (lat, long, crime type, outcome, date)
+%Patterns - market basket analysis (categorical data / transactions) (LSOA, crime type, date, %outcome)
+%e.g. given crime type, LSOA, .., it is it likely that the crime have a certain outcome. 
+%e.g. a given month and LSOA might lead to a certain crime type
+%Statistics - e.g. frequency of column x in a given period
+
+%We wish to perform clustering to see what patterns are in the data. We expect answers to questions such as:
+%What areas contain the most violent crime?
+%(Cluster location/crime type - look at number of incidents in area, as well as which type of %crime is most prominent in each area.)
+
+%(Which types of crime are most popular with respect to the time of year? Christmas, %Halloween, etc.)
+
+%What types of crime most often lead to a suspect charged with a crime?
+
+%Which ethnicities are most often found with drugs when searched?
+
+%But surprising insights may also present themselves.
+
+
+
+\section{Background}
+% Data analysis background
+% • Why is the data analysis important?
+% • What problem are they solving?
+
+
+
+% Method of analysis
+
+
+\end{document}

@@ -1,0 +1,19 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Future Work}
+Given more time and access to more resources the following continuations of the project have been projected: 
+
+\begin{itemize}
+    \item \textbf{Oozie} - for scheduling download of CSV files, transform CSV etc. This would make it possible to automize a monthly download of the latest crime data from Data Police UK as well as perform a data frame transformation on the files and save them in the HDFS.
+    \item \textbf{Machine Learning pipeline} - Running clustering for various size K (number of clusters), N (number of input obersvations) and M (minimum cluster size). Make elbow plots for finding best K-values. Transform the current output schema into an aggregate schema (ClusterID, ClusterLat, ClusterLong, ClusterCount).
+    \item \textbf{Deploying the cluster setup to powerful hardware} to get better performance and be able to increase the number of worker and data nodes.
+    \item \textbf{Better data visualization in the web client} to allow for dynamic data querying and visualization. This would be by making it possible to request data from a certain area, time period, etc. and plot the data (e.g. as bar charts).
+    \item \textbf{Import crime data from new sources} (e.g. twitter feeds, other police forces such as Scotland etc.)
+    \item \textbf{Include population data} in the UK to adjust the crime data for population. Gaining a measure for "Crime per capita" might reveal novel insights.
+    \item \textbf{Setup and deploy ZooKeeper} to manage nodes in the cluster.
+    \item \textbf{Deploy drill on YARN} on Hadoop cluster. This step would require ZooKeeper to be set up.
+     \item \textbf{Security}. Nothing has passwords, all ports are open, Drill is an SQL injection nightmare, etc.
+    \item Tune cluster configuration
+\end{itemize}
+
+\end{document}

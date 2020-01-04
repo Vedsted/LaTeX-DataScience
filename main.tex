@@ -6,7 +6,7 @@
 %\subfile{Examples.tex}
 
 %%%%%%%%%%%%  Inkluder følgende sektioner %%%%%%%%%%%%
-\subfile{0_Main/1_Prologue/Abstract.tex}
+\subfile{0_Main/1_Prologue/0_Abstract.tex}
 \newpage
 
 \setcounter{secnumdepth}{3} % removes numbering from subsubsections
@@ -17,14 +17,24 @@
 \pagenumbering{arabic} %Sidehoved og sidefod
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
-\subfile{0_Main/1_Prologue/Introduction.tex}
+\subfile{0_Main/1_Prologue/1_Introduction.tex}
 \newpage
-\subfile{0_Main/2_Body/Background.tex}
+\subfile{0_Main/2_Body/2_Data.tex}
 \newpage
-\subfile{0_Main/2_Body/Architecture.tex}
+\subfile{0_Main/2_Body/3_Technologies.tex}
 \newpage
-\subfile{0_Main/2_Body/Visualization.tex}
+\subfile{0_Main/2_Body/4_Architecture.tex}
 \newpage
+\subfile{0_Main/2_Body/5_Insight.tex}
+\newpage
+\subfile{0_Main/2_Body/6_Implementation.tex}
+\newpage
+\subfile{0_Main/3_Epilogue/7_Evaluation.tex}
+\newpage
+\subfile{0_Main/3_Epilogue/8_Conclusion.tex}
+\newpage
+\subfile{0_Main/3_Epilogue/9_FutureWork.tex}
+
 
 
 %%%%%%%%%%%%  Inkluder Andet %%%%%%%%%%%%
@@ -33,9 +43,9 @@
 %\printglossary[type=\acronymtype]
 %\printglossary[type=main]
 
-%\newpage
-%\nocite{*}%Shows all refs
-%\printbibliography
+\newpage
+\nocite{*}%Shows all refs
+\printbibliography
 
 % Appendix removed to increase compile speed
 \newpage

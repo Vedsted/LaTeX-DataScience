@@ -1,0 +1,79 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Implementation}
+\label{implementation}
+Implementation details regarding the specifics of this project are explained throughout this section.
+\subsection{Spark}
+%spark-submit / spark context / etc.
+
+\subsection{Bisecting K-Means}
+In this clustering application, the features chosen to measure distance between observations are the latitude and longitude coordinates of each crime. This leads the Bisecting K-Means (BKM) algorithm to identify the crimes that are geographically closest to each other and group them in a cluster. This grouping allows the data to be presented in a more concise manner, by presenting the size (number of observations) and location (coordinates of the center) of each cluster as opposed to delivering every data point. This reduces the overall number of data objects that are present without reducing the amount of available information. When the data is plotted on a heat map, having fewer data points eases the computational load coming from the graphical user interface.
+
+\subsection{Spark SQL}
+The original format of the UK street crime data is comma separated value (CSV) files, however, Spark-ML requires input in the form of a data frame. Spark-SQL makes it possible to directly convert the contents of CSV files to in-memory data frames which can be passed to a machine learning algorithm as input.
+
+A secondary usage of the Spark-SQL library is the ability directly read and write files to the distributed file system. This make is possible to save and load data frame to and from the HDFS, meaning the file read/write and format conversion can be handled with a single library. 
+
+\subsection{Docker}
+Docker has been used extensively in this project in order to set up the nodes that run the HDFS, Yarn, Spark and Drill. The primary benefit of Docker has been consistency. Docker images ensure that the nodes are identical every time they are created regardless of the host machine. This section describes the docker images that have been created and used during the project and how the images have been composed in order to form the cluster.
+
+\subsubsection{Images}
+The following images have been used:
+\begin{enumerate}
+    \item bde2020/hadoop-namenode:2.0.0-hadoop3.1.2-java8
+    \item bde2020/hadoop-datanode:2.0.0-hadoop3.1.2-java8
+    \item bde2020/hadoop-resourcemanager:2.0.0-hadoop3.1.2-java8
+    \item bde2020/hadoop-historyserver:2.0.0-hadoop3.1.2-java8
+    \item csbc92/nodemanager
+    \item csbc92/spark-base
+    \item vedsted/spark\_submitter
+    \item vedsted/spark\_local
+    \item vedsted/drill
+\end{enumerate}
+ 
+The images beginning with bde2020 have not been created in this project. They have been created by Big Data Europe, an organisation working to enable European companies to use Big Data funded by the European Union. These images contain implementations of Hadoop components. The HDFS cluster used in this project is based on images 1 and 2. The HDFS consists of one constainer based on the bde2020/hadoop-namenode image and three instances of the bde2020/hadoop-datanode image. Yarn uses images from Big Data Europe for its resource manager and history server, but a customized image for its node managers. csbc92/nodemanager is a customized image extending bde2020/hadoop-nodemanager:2.0.0-hadoop3.1.2-java8 from Big Data Europe. The command \texttt{RUN apt update \&\& apt install -yq python python3} has been added to satisfy the dependencies of the spark jobs that will be executed on these nodes. The final image that constantly has an instance running in the cluster is vedsted/drill. The drill image is based on an image that has openjdk 8 installed. In contains an installation of Apache Drill that is configured to work with HDFS. 
+
+The last three images are not directly related to the Hadoop cluster. They are concerned with submitting spark jobs. vedsted/spark\_local is based on the openjdk:8 image and allows the user to run pyspark jobs locally. The image contains installations of python and pyspark.
+csbc92/spark-base is simply a linux distribution with spark installed. vedsted/spark\_submitter extends csbc92/spark-base in order to run pyspark jobs on the cluster. The entrypoint of the image is a shell script called submit-job.sh. This script is executed when a container based on the image is started. The script runs the following command: \texttt{/spark/bin/spark-submit \
+--master yarn \
+--deploy-mode cluster \
+/app/app.py}. This submits a python script to be run as a spark job on the cluster. The spark submitter is used for multiple use cases. It is used to convert .csv files to data frames and to perform the clustering of the data points.
+
+The images created through the project can be found on docker-hub at:
+\begin{itemize}
+    \item \href{https://hub.docker.com/u/vedsted}{https://hub.docker.com/u/vedsted}
+    \item \href{https://hub.docker.com/u/csbc92}{https://hub.docker.com/u/csbc92}
+\end{itemize} 
+
+Configurations for the images can be found at GitHub: 
+\begin{itemize}
+    \item \href{https://github.com/Vedsted/DataScienceProject/tree/master/images}{https://github.com/Vedsted/DataScienceProject/tree/master/images}
+\end{itemize}
+ 
+\subsubsection{Compose Environments}
+Docker has a utility program \textit{docker-compose} which is used to start the whole Hadoop environment and individual Docker containers. Using Docker compose files it is possible to define how many docker containers should work together. Listing \ref{lst:compose} shows an excerpt of the compose file for the Hadoop cluster. The service defined in this part of the compose file is a data node. The compose file defines what image the container should use, how should be connected to the network and other settings. Note that in line 12, it is specified that it is a precondition that the namenode should be available on port 9870 before the data node is operational.
+The compose file defines many other services than the one in this example. In addition to the data node in listing \ref{lst:compose} It defines the namenode, resource manager, node managers, drill, history server, and two other datanodes.
+
+\begin{lstlisting}[style=JAVA, label={lst:compose}, caption={Part of the Docker compose file}]
+services:
+  #[...]
+  datanode1: #Slave1
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.1.2-java8
+    container_name: datanode1
+    restart: always
+    ports:
+      - 9864:9864
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+    networks:
+      cscourse:
+        ipv4_address: 172.25.0.3
+\end{lstlisting}
+
+
+
+\end{document}

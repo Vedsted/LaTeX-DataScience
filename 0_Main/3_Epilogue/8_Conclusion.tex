@@ -1,0 +1,10 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Conclusion}
+
+This project has resulted in the development of a distributed-processing platform which allows users to query data from a Hadoop distributed file system as well as submit machine learning jobs to be executed. This consists of Docker containers hosting the Hadoop Distributed File System, Yarn, and Drill. The HDFS is used to store data, Yarn is the cluster manager for running Spark data processing jobs. Spark jobs can be run in local mode, client mode and cluster mode. Drill is used to make SQL queries to the data stored on the HDFS.
+
+The data published by Data Police UK is able to be visualized on an interactive Leaflet heat map over the United Kingdom. This map shows the concentration of crimes throughout England, Wales and Northern Ireland by querying clustered data from the HDFS. Clustering is carried out on the original data set of street crimes using the bisectional k-means clustering algorithm. This reduces the total number of data entries without removing available information, meaning the amount of resources required to visualize the data is greatly reduced. Drill's SQL queries allow users to quickly and efficiently pull data from the HDFS which is used to supply the Leaflet heat map with the data necessary to create the visualization. 
+
+The features of the cluster that have been implemented create a flexible baseline for data analytics processing which make use of clustering. Large data sets can be clustered down to manageable amounts of data points and these clustered data points can be speedily queried from a front-end visualization implementation due to the nature of Drill's SQL query capability. 
+\end{document}

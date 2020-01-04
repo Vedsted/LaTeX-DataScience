@@ -1,0 +1,41 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Evaluation}
+In this section the cluster and spark jobs created is evaluated as well as the application used for visualisation.
+
+\subsection{Cluster}
+%SQL query with Drill, very fast
+%Lack of resources - time / hardware / etc. 
+Data access on the cluster created in this project exceeds all expectations. It is incredible to see how fast Drill is able to perform SQL queries on gigabytes of data. \todoL{skriv faktiske målinger. noget a la "Drill is able to extract the 2000 rows that satisfy the condition "WHERE blablabla" from a XX XXX MB data set in XX seconds"} And this result is with the entire cluster running on a single laptop. 
+
+Processing the data, however, is not very fast. Performing the bisectional K-Means clustering could not be done on the entirety of the data within any reasonable time span. In this case, it is evident that running the cluster causes significant overhead compared to running the clustering algorithm locally. This would likely change if more machines with more powerful hardware were available.
+
+Ideally, the cluster should be distributed on multiple machines, and each of those machines should have more resources than the laptops that were available for this project. This has not been possible for two reasons: lack of time, and lack of hardware. Only laptops with very limited resources have been available, and the time and networking equipment needed to distribute the cluster on the laptops were not.
+
+\subsection{Running jobs on cluster}
+%Clustering works, effictiveness? Depends - gotta see the heat map
+One of the key features of the cluster developed in this project is the option to submit Spark jobs to be executed on the cluster with Yarn as the cluster manager. Spark jobs can be executed in three modes: local, yarn-client and yarn-cluster.
+
+When using \textit{local mode}, a Docker container is started and the Spark job is executed job locally, i.e., in that Docker container. The spark job is still able to access the HDFS to read and write data because the Docker container running the Spark job is connected to the same network as the Docker containers hosting the HDFS. Running Spark in local mode less overhead than the other options and is therefore better suited for development and debugging purposes. 
+
+A new Docker container is also started for running \textit{Yarn in client mode}. This container submits the Spark job to the worker nodes (node managers) and hosts the driver program. The actual work is being done on the node managers, but if the container hosting the driver program is stopped, the Spark job fails.
+
+When running \textit{Yarn in cluster mode}, a new Docker container is also started. This is only because the Spark job needs to be submitted from a machine that is connected to the same network as the cluster. When the Spark job has been submitted in cluster mode, both the actual work and the driver program is executed on the node managers. The container created for submitting the Spark job may therefore be killed while the Spark job is running without affecting it.
+
+All three modes have been tested and perform as expected, i.e., killing the driver container stops the Spark job in client mode, but not in cluster mode.
+
+
+\subsection{Web Server and Client}
+%Able to show heat map
+The web server and web client developed in this project work well. They do not have many features, as most of the development effort was put into the architecture, design and configuration of the cluster. 
+
+The web server exposes an API used by the web client. The server is able to extract data from the HDFS by submitting SQl queries to Drills REST API. It then performs some filtering and transformation of the data so that it is served to the web client in the correct format.
+
+The web client retrieves data from the web server by performing an http request. The data is then displayed on a heatmap that shows where there are the most data points, i.e., where most crime has been committed. The client has a simple GUI to tune certain parameters of the visualization. \todoL{and, if we ever find the time to make it, a UI to filter crime data}
+
+
+
+
+
+
+\end{document}

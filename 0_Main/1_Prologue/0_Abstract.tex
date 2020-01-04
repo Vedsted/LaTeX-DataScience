@@ -1,0 +1,14 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\begin{abstract}
+A rise in crime rates leads to many negative consequences for the individuals involved, as well as the community being affected adversely. This includes increased workloads for police forces and strain being put on the government due to damage costs and reduced living conditions. 
+
+This project has designed and implemented a Hadoop Distributed File System (HDFS) architecture using Yarn as a resource manager for nodes in the processing cluster. This system is used to run a bisecting k-means clustering algorithm to pre-process street crime data from areas in England, Wales and Northern Ireland. This clustered data is then presented via a heat map over crime occurrences. 
+
+This has been implemented using YARN as a cluster manager and utilizing Spark SQL and Spark's Machine Learning Library, Spark ML, for data processing purposes. Processed data can be access and presented through a web server and plotted on a heat map using the Leaflet heat library. The total size of the data set consists of 20 million observations prior to running the clustering algorithm. The clustering algorithm is able to reduce the amount of observations significantly and at the same time preserve patterns of the original data set.
+
+Spark jobs are able to be submitted to the resource manager which allocates resources and starts applications on the cluster. Results from machine learning jobs are able to be saved in the HDFS as data frames in the form of CSV files. These results are used for two main purposes. A Leaflet heat map retrieves that data and presents it is an a lightweight heat map over a geographical location. The data in the HDFS is also able to be accessed using Drill in order to perform SQL queries on the stored data frames.
+
+This cluster implementation allows for easy access to stored data for both machine learning and visualization purposes. This makes it possible to add additional front-end features whose visualization input can be queried directly from the data stored on the HDFS. 
+\end{abstract}
+\end{document}

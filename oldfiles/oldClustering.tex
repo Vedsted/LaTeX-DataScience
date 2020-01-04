@@ -1,0 +1,15 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Machine Learning}
+This project makes use of a clustering algorithm to ease data presentation.
+
+\subsection*{Bi-sectional K-Means Clustering}
+Traditional k-means clustering requires the user to define a number of clusters to be created. Each observation from the data set is subsequently compared to each of the randomly chosen cluster centroids to determine which is closest. Closeness is calculated by the multi-dimensional distance between the values of each feature between two observations. After randomly selecting the cluster centroids every observation is assigned to a centroid. Once this is complete, the centers of the newly computed clusters replace the original centroids. This continues until the average distance from each observation to its centroid can no longer be decrease \cite{kMeans}. However, k-means clustering is prone to getting stuck in local minima points. In contrast, bi-sectional k-means clustering (BKM) is a variant developed to combat this weakness.
+
+%What is BKM
+BKM functions by randomly assigning initial cluster centroids after which k-means with a \textit{k} of two is continuously carried out on the cluster with the largest error until the desired number of clusters is achieved. Error is defined as the total distance from each observation to the centroid of its assigned cluster \cite{bkmGeneral}. BKM not only avoids local minima, but is generally more efficient than traditional k-means clustering for larger values of \textit{k}(number of clusters) due to the fact that only the data points of a single cluster are involved in the computation  \cite{bkmGood}.
+
+\subsubsection*{Usage}
+In this clustering application, the features chosen to measure distance between observations are the latitude and longitude of each crime. This leads the BKM algorithm to identify the crimes that are geographically closest to each other and group them in a cluster. This grouping allows the data to be presented in a more concise manner, by presenting the size (number of observations) and location (coordinates of the center) of each cluster as opposed to delivering every data point. 
+
+\end{document}
